@@ -1,0 +1,34 @@
+:root {
+
+    /* 移除背景、对话框的图片 */
+    --custom-background-image: url("");
+    --custom-background-image-dialog: url("");
+    
+    /* 深色主题参考的是onenote的配色 */
+    --b3-theme-background-light: rgb(61,61,61);
+    --b3-theme-background: rgb(41,41,41);
+    --b3-border-color: rgb(223, 166, 240);
+    /* 取消引用块下方的波浪线 */
+    --custom-span-ref-animation-icon: url("") ;
+
+    /* 调整标签颜色 */
+    --custom-span-tag-background-color: transparent;
+
+    /* 调整一下强调颜色 */
+    --b3-theme-primary-lightest: rgba(49, 3, 76, 0.1)!important;
+    --b3-theme-primary-lighter: rgb(147,50,191);
+    --b3-theme-primary-light: rgb(174,75,213);
+    --b3-theme-primary:      rgb(223, 166, 240);
+    --b3-theme-surface-lighter:var(--b3-theme-primary);
+}
+
+/* ------------------------------- 顶栏日历插件相关设置开始 ------------------------------------------ */
+
+
+.arco-tabs, .arco-trigger-popup{
+    --arco-primary:203, 100, 234!important;
+    --link-6:203, 100, 234!important;
+}
+
+
+/* ------------------------------- 顶栏日历插件相关设置结束 ------------------------------------------ */

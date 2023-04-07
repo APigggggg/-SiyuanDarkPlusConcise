@@ -1,0 +1,1005 @@
+/* ------------------------------- 顶栏日历插件相关设置开始 ------------------------------------------ */
+
+
+.arco-tabs, .arco-trigger-popup{
+    --color-primary-light-2: var(--b3-theme-background-light)!important
+}
+.arco-picker-date-value.exist{
+    color:rgba(255, 255, 255, 0.5);
+}
+.arco-picker-cell:not(.arco-picker-cell-selected):not(.arco-picker-cell-in-view) .exist{
+    background-color: var(--color-primary-light-2)!important;
+}
+
+/* ------------------------------- 顶栏日历插件相关设置结束 ------------------------------------------ */
+
+
+:root {
+    --custom-popover-background-color:var(--b3-theme-background)!important;
+    --custom-popover-function-menu-background-color:var(--b3-theme-background);
+    --b3-theme-surface: var(--b3-theme-background-light);
+    --b3-theme-secondary: var(--b3-border-color);
+    --custom-tab-bar-background-color:var(--b3-theme-background-light)!important;
+    --custom-dock-background-color:var(--b3-theme-background-light)!important;
+    --custom-tool-bar-background-color:var(--b3-theme-background-light)!important;
+    --custom-status-bar-background-color:var(--b3-theme-background-light)!important;
+    --custom-editor-background-color:var(--b3-theme-background-light)!important;
+    /* 把对话框调整成不透明 */
+    --custom-dialog-background-color: var(--b3-theme-background-light);
+    /* 最顶上的标题不显示 */
+    --b3-toolbar-color:transparent;
+
+    /* 取消引用块下方的波浪线 */
+    --custom-span-ref-animation-icon: url("") !important;
+    
+
+    /* 取消空行提示 */
+    --custom-empty-p: "";
+    --custom-empty-c: "";
+    --custom-empty-t: "";
+    --custom-empty-u: "";
+    --custom-empty-o: "";
+
+    /* 取消图片边框的阴影 */
+    --custom-box-shadow-spread : 0px;
+
+    /* 参考zhanglight，改了代码的字体 */
+    --b3-font-family-code: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, Consolas, "HarmonyOS Sans SC", "Microsoft YaHei", "Liberation Mono", "Courier New", monospace;
+
+    /* 编辑区导航栏(面包屑)背景颜色 | The background color of the edit area navigation bar (breadcrumbs) */
+    --custom-editor-breadcrumb-bar-background-color: var(--b3-theme-background-light);
+
+    /* 编辑区面板不需要margin */
+    --custom-panel-distance:0px;
+
+    /* 取消悬浮预览窗口最小高度 | The minimum height of the hover preview window */
+    --custom-popover-min-height: 5%;
+
+    /* 取消悬浮预览窗口最大宽度 | The maximum width of the hover preview window */
+    --custom-popover-max-width: 95%;
+
+
+    /* 参考Chrome A4的表格颜色设置 */
+    --b3-table-border-color: rgb(211, 211, 211);
+    --b3-table-border-black-color: #686868;
+    --b3-table-th-color: transparent;
+    --b3-table-trn-color: transparent;
+    --b3-table-tr2n-color: transparent;
+
+    /* 调整标签颜色 */
+    --custom-span-tag-background-color: transparent;
+    /* 调整列表辅助线颜色 */
+    --custom-list-guides-line-color: rgba(136, 136, 136, 0.05);
+    /* --custom-list-guides-line-color: rgba(250, 250, 250, 1); */
+
+    /* 调整striking color */
+    --custom-striking-color:var(--b3-border-color)!important;
+    /* 滚动条背景颜色 */
+    --custom-scroll-track-background-color: rgba(136, 136, 136, 0.05);
+    /* 呼出引用块时显示的颜色 */
+    --custom-popover-menu-path-color: var(--b3-theme-primary);
+}
+
+#layouts{
+    padding: 0px;
+}
+
+/* ------------------------------- 界面设置部分 ------------------------------------------ */
+/* 没有背景图了，得把背景色改一下 */
+body.fn__flex-column {
+    background-color: var(--b3-theme-background-light);
+}
+.fn__flex-1.protyle.fullscreen {
+    background-color: var(--b3-theme-background-light);
+}
+
+
+/* 设置页签的边框颜色 */
+.layout-tab-bar .item {
+    /* border: 2px solid rgba(136, 136, 136, 0.12)!important; */
+    border: 1px solid var(--b3-theme-background-light)!important;
+    border-top: 0px!important;
+    border-left: 0px!important;
+    border-right: 0px!important;
+    border-radius: 0px !important;
+}
+
+/* 设置边框 */
+.b3-dialog__container{
+    border: 0px solid var(--b3-theme-surface-lighter);
+}
+
+
+/* 页签项最大宽度 */
+.layout-tab-bar .item {
+    max-width: 15em;
+}
+
+/* 不要影响设置里的页签 */
+.b3-dialog .layout-tab-bar .item{
+    max-width: 200em;
+    flex:1;
+    /* border-top: 1px solid var(--b3-theme-background-light)!important */
+}
+.b3-dialog .layout-tab-bar .item__text{
+    text-align: center;
+}
+
+
+/* 顶栏的一些设置 */
+#layouts > div.fn__flex.fn__flex-1 > div.layout__center.fn__flex.fn__flex-1 > div > div > div.fn__flex > ul.layout-tab-bar.layout-tab-bar--readonly.fn__flex-1 > li{
+    border: transparent !important;;
+}
+
+
+
+
+/* 参考Chrome A4主题隐藏左上角设置按钮，鼠标悬浮时显示，给左、右工具栏也加了同样效果 */
+#toolbar .toolbar__item svg {
+    opacity: 0;
+    color :var(--b3-theme-on-background);
+}
+#toolbar:hover svg {
+    opacity: 1;
+}
+
+#toolbar .protyle-toolbar__divider {
+    opacity: 0;
+}
+#toolbar:hover .protyle-toolbar__divider {
+    opacity: 1;
+}
+
+#dockLeft .dock__item svg {
+    opacity: 0;
+}
+#dockLeft :hover svg {
+    opacity: 1;
+}
+
+
+#dockRight .dock__item svg {
+    opacity: 0;
+}
+#dockRight :hover svg {
+    opacity: 1;
+}
+
+
+#status.fn_flex.status svg{
+    opacity: 0;
+}
+
+#status .toolbar__item svg{
+    opacity: 0;
+}
+
+#status:hover .toolbar__item svg{
+    opacity: 1;
+}
+
+.dock__item--activefocus svg{
+    opacity: 1!important;
+}
+
+/* 面包屑颜色设置，尽量不影响嵌入快里的面包屑设置 */
+
+.fn__flex-1.protyle > .popover__block.ft__primary{color:var(--b3-theme-on-background);}
+.fn__flex-1.protyle > .protyle-breadcrumb  .protyle-breadcrumb__item {border-color: transparent !important;;}
+.fn__flex-1.protyle > .protyle-breadcrumb  .protyle-breadcrumb__bar {
+    opacity: 0.2;
+    color :var(--b3-theme-on-background);
+}
+.fn__flex-1.protyle > .protyle-breadcrumb  .protyle-breadcrumb__bar:hover {
+    opacity: 1;
+}
+.protyle-wysiwyg__embed > .protyle-breadcrumb__bar{
+    background-color: var(--b3-theme-background)!important;
+}
+
+
+/* 调整dark+主题选中功能的显示颜色 */
+.toolbar__item.toolbar__item--active svg{
+    color: var(--b3-theme-primary)!important;
+}
+.toolbar__item.toolbar__item--active{
+    box-shadow: none!important;
+}
+
+#toolbar .float-tooldock .toolbar__item#custom-toolbar-more{
+    box-shadow: none!important;
+}
+
+
+
+
+/* 防止界面中出现没什么用的滚动条 */
+.fn__flex.fn__flex-1{
+    overflow-x:hidden;
+}
+
+
+/* 文档树里不要给笔记本之间加padding */
+.b3-list.b3-list--background{
+    padding: transparent!important;
+    outline-width: 0px !important;
+}
+
+/* 文档树里多用黑白色 */
+.b3-list-item__icon.b3-tooltips.b3-tooltips__e,
+.b3-list-item__icon.b3-tooltips.b3-tooltips__n{
+    filter: grayscale(100);
+}
+
+#commonMenu[data-name="barWorkspace"] .b3-menu__icon{
+    filter: grayscale(100);
+}
+
+/* 文档树、反链面板的border处理 */
+.fn__flex-column.fn__flex-shrink.layout__dockl{
+    border-right: solid 0.5px var(--b3-theme-primary);
+}
+
+.fn__flex-column.layout__dockr{
+    border-left: solid 0.5px var(--b3-theme-primary);
+}
+
+#dockLeft {
+    border-right: solid 0.0px var(--b3-theme-primary)!important;
+}
+#dockRight {
+    border-left: solid 0.0px var(--b3-theme-primary)!important;
+}
+
+
+
+/* ----------------------------- 界面设置部分结束 ---------------------------------------- */
+
+
+/* ------------------------------- 斜杠菜单部分 ------------------------------------------ */
+/* 参考zhang light */
+/* 将"/"弹出的选择窗口分为4栏，便于直观进行选择（分栏） */
+.b3-menu.b3-list.b3-list--background {
+    column-count: 4;
+    column-gap: 5px;
+    min-width: 50vw !important;
+    /* 设置最大高度 */
+    max-height: 480px !important;
+    border: var(--b3-border-column);
+    padding: 4px;
+}
+
+/* 设置项目之间的分割线颜色 */
+.b3-menu.b3-list.b3-list--background .b3-menu__separator {
+    background-color: var(--b3-theme-primary);
+    height: 0.05em;
+}
+
+
+/* ----------------------------- 斜杠菜单部分结束 ---------------------------------------- */
+
+
+/* ------------------------------- 表格部分开始 ------------------------------------------ */
+
+/* 参考Chrome A4主题 */
+
+.b3-typography table tr,
+.protyle-wysiwyg table tr {
+    background-color: transparent;
+}
+
+/* 设置表头区域顶部边框，使表格更明显 */
+.protyle-wysiwyg table thead,
+.b3-typography table thead {
+    background-color: transparent !important;
+}
+
+/*设置表格表头样式，颜色，背景，加粗，居中对齐*/
+table th {
+    font-weight: bold;
+    text-align: center;
+    background-color: transparent !important;
+    border-top: 0.15em solid var(--b3-table-border-black-color) !important;
+    border-bottom: 0.1em solid var(--b3-table-border-black-color) !important;
+}
+
+.b3-typography table thead, 
+.protyle-wysiwyg table thead{
+    border-left: transparent !important;
+    border-right: transparent !important;
+    border-bottom: 1px solid var(--b3-table-border-black-color) !important;
+}
+
+/* 设置表格内部边框 */
+th, td {
+    min-width: 1em;
+    /* border-left: transparent !important; */
+    border-left: 0.01em solid var(--b3-table-border-black-color) !important;
+    border-right: 0.01em solid var(--b3-table-border-black-color) !important;
+    border-top: 0px transparent !important;
+    border-bottom: 0px transparent !important;
+    border-collapse: collapse;
+    color: inherit;
+}
+
+table th:last-child,
+table tr td:last-child {
+    border-right-color: transparent !important;
+}
+
+table th:first-child,
+table tr td:first-child {
+    border-left-color: transparent !important;
+}
+/* 表格奇偶行不同颜色 */
+tbody tr:nth-child(2n) {
+    background-color: transparent !important;
+}
+
+tbody tr:nth-child(2n + 1) {
+    background-color: transparent !important;
+}
+
+tbody tr:last-child {
+    border-bottom: 0.15em solid var(--b3-table-border-black-color);
+}
+
+.b3-typography table tr:hover,
+.protyle-wysiwyg table tr:hover {
+  /* 鼠标悬浮行 */
+  outline: 0px solid var(--b3-theme-on-surface)!important;
+}
+
+
+/* Dark+主题里，给render为sroll的表格增加了outline颜色，我不想要 */
+.protyle-wysiwyg[custom-render~=scroll]>div[data-node-id][data-type="NodeTable"] table>thead,
+.protyle-wysiwyg[custom-render~=滚屏]>div[data-node-id][data-type="NodeTable"] table>thead,
+.protyle-wysiwyg[custom-render~=滚动]>div[data-node-id][data-type="NodeTable"] table>thead,
+.protyle-wysiwyg [data-node-id][custom-render~=scroll][data-type="NodeTable"] table>thead,
+.protyle-wysiwyg [data-node-id][custom-render~=滚屏][data-type="NodeTable"] table>thead,
+.protyle-wysiwyg [data-node-id][custom-render~=滚动][data-type="NodeTable"] table>thead {
+    outline: 1px transparent;
+}
+
+/* ------------------------------- 表格部分结束 ------------------------------------------ */
+
+/* ------------------------------ 标题设置开始 ----------------------------------------- */
+
+/* 取消标题自动编号，暂时不考虑怎么复原 */
+.protyle-wysiwyg [data-node-id][data-type="NodeHeading"]:not([fold="1"])::before
+{
+    content: ""!important;
+}
+.protyle-wysiwyg [data-node-id][data-type="NodeHeading"]:not([fold="1"])>[contenteditable][spellcheck]:empty
+{
+    padding-left: 0;
+}
+
+/* 商店内容 */
+h1:not([fold="1"])::before,
+h2:not([fold="1"])::before,
+h3:not([fold="1"])::before,
+h4:not([fold="1"])::before,
+h5:not([fold="1"])::before,
+h6:not([fold="1"])::before
+{
+    content: ""!important;
+}
+
+
+/* 取消标题的颜色设置 */
+
+.protyle-wysiwyg [data-node-id].h1,
+.b3-typography h1,
+.protyle-wysiwyg [data-node-id].h2,
+.b3-typography h2,
+.protyle-wysiwyg [data-node-id].h3,
+.b3-typography h3,
+.protyle-wysiwyg [data-node-id].h4,
+.b3-typography h4,
+.protyle-wysiwyg [data-node-id].h5,
+.b3-typography h5,
+.protyle-wysiwyg [data-node-id].h6,
+.b3-typography h6{
+    color:var(--b3-theme-on-background);
+}
+
+
+/* 取消左侧的线条 */
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    border-left: 0px solid black !important;
+    padding-left: 4px !important;
+}
+/* 商店内容 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    border-left: 0px solid black !important;
+    padding-left: 4px !important;
+}
+
+/* 设置标题折叠样式 */
+.protyle-wysiwyg [fold="1"][data-node-id][data-type="NodeHeading"]::after {
+    /* 去除原有标记 */
+    content: none!important;
+}
+.protyle-wysiwyg [fold="1"][data-node-id][data-type="NodeHeading"]::before {
+    /* 添加子标题折叠标记 */
+    content: var(--custom-h-fold-mark);
+    width: 8px;
+}
+.protyle-wysiwyg [fold="1"][data-node-id][data-type="NodeHeading"]{
+    transform:translate(-8px);
+}
+
+/* ------------------------------ 标题设置结束 ----------------------------------------- */
+
+
+
+/* ------------------------------ 编辑区设置开始 ----------------------------------------- */
+
+
+/* 参考Chrome A4 设置一个像A4纸的玩意儿，但是可以拖拽的 */
+/* 设置背景颜色 */
+.protyle-content {
+    background-color: var(--b3-theme-background-light);
+}
+
+/* 设置标题宽度 */
+.protyle-title.protyle-wysiwyg--attr {
+    max-width: 26cm!important;
+    margin: 0 auto !important;
+}
+
+/* 设置正文背景颜色/A4纸大小 */
+.protyle .b3-typography,
+.protyle .protyle-wysiwyg {
+    /* width: 26cm!important; */
+    max-width: 26cm!important;
+    margin: 25px auto 50px !important;
+    padding: 2cm !important;
+    background-color: var(--b3-theme-background);
+    box-shadow: 0 4px 20px 0 rgba(100, 100, 100, 0.08);
+    text-align: justify;
+    resize: horizontal;
+    overflow: scroll;
+}
+
+
+
+
+/* 自适应宽度动画关闭 */
+.protyle-wysiwyg,
+.protyle-background__iconw,
+.protyle-title {
+	transition: none;
+}
+
+/* 隐藏右侧类似滚动条的定位条 */
+input.b3-slider{
+    opacity:0;
+}
+input.b3-slider:hover{
+    opacity:1;
+}
+
+
+/* 页面宽度设置 */
+
+.protyle-content:has(>[custom-width="30"]) .protyle-background ~ .protyle-title,
+.protyle-content:has(>[custom-width="30"]) .protyle-background ~ .protyle-wysiwyg{
+    max-width:  30cm !important;
+}
+
+.protyle-content:has(>[custom-width="35"]) .protyle-background ~ .protyle-title,
+.protyle-content:has(>[custom-width="35"]) .protyle-background ~ .protyle-wysiwyg{
+    max-width:  35cm !important;
+}
+
+.protyle-content:has(>[custom-width="40"]) .protyle-background ~ .protyle-title,
+.protyle-content:has(>[custom-width="40"]) .protyle-background ~ .protyle-wysiwyg{
+    max-width:  40cm !important;
+}
+
+
+
+/* ------------------------------ 编辑区设置结束 ----------------------------------------- */
+
+/* ------------------------------ 闪卡设置开始 ----------------------------------------- */
+.protyle-wysiwyg [data-node-id][custom-riff-decks]:not(.sb, .list, .li) {
+    /* 设置为闪卡的块 */
+    box-shadow: 0 0 0 0 var(--custom-riff-decks-shadow-color-default) inset;
+}
+.protyle-wysiwyg [data-node-id][custom-riff-decks].sb{
+    /* 设置为闪卡的超级块 */
+    box-shadow: 0 0 0 0 var(--custom-riff-decks-shadow-color-super);
+}
+.protyle-wysiwyg [data-node-id][custom-riff-decks].list {
+    /* 设置为闪卡的列表块 */
+    box-shadow: 0 0 0 0 var(--custom-riff-decks-shadow-color-list) inset;
+}
+.protyle-wysiwyg [data-node-id][custom-riff-decks].li {
+    /* 设置为闪卡的列表项 */
+    box-shadow: 0 0 0 0 var(--custom-riff-decks-shadow-color-li) inset;
+}
+
+
+.protyle-wysiwyg [data-node-id][custom-riff-decks]:not(.sb, .list, .li):hover {
+    /* 设置为闪卡的块 */
+    box-shadow: 0 0 var(--custom-riff-decks-shadow-width) 0 var(--custom-riff-decks-shadow-color-default) inset;
+}
+.protyle-wysiwyg [data-node-id][custom-riff-decks].sb:hover{
+    /* 设置为闪卡的超级块 */
+    box-shadow: 0 0 var(--custom-riff-decks-shadow-width) 0 var(--custom-riff-decks-shadow-color-super);
+}
+.protyle-wysiwyg [data-node-id][custom-riff-decks].list:hover {
+    /* 设置为闪卡的列表块 */
+    box-shadow: 0 0 var(--custom-riff-decks-shadow-width) 0 var(--custom-riff-decks-shadow-color-list) inset;
+}
+.protyle-wysiwyg [data-node-id][custom-riff-decks].li:hover {
+    /* 设置为闪卡的列表项 */
+    box-shadow: 0 0 var(--custom-riff-decks-shadow-width) 0 var(--custom-riff-decks-shadow-color-li) inset;
+}
+
+/* 平常不隐藏 */
+.protyle-wysiwyg [data-type="mark"]{
+    color: var(--b3-theme-on-background)!important;
+    background-color: transparent!important;
+    border-bottom: 1px solid;
+}
+
+/* ------------------------------ 闪卡设置结束 ----------------------------------------- */
+
+
+/* ------------------------------- 其他设置开始 ------------------------------------------ */
+
+/* 取消块引用锚文本前后的空格与符号 */
+.protyle-wysiwyg [data-node-id] span[data-type="block-ref"]::before {
+    content: "";
+    width: 0.0em;
+}
+.protyle-wysiwyg [data-node-id] span[data-type="block-ref"]::after {
+    content: "";
+    width: 0.0em;
+}
+/* 参考zhang light更改块引用锚文本的样式，只用下划线显示 */
+.protyle-wysiwyg [data-node-id] span[data-type="block-ref"] {
+    color: inherit;
+    padding-bottom: 0.05em !important;
+    border-bottom: 1.5px solid var(--b3-theme-primary);
+}
+
+/* 使用Katex默认的字体大小 */
+.b3-typography .katex {
+    font-size: 1.21em;
+}
+
+
+/* 参考zhang light，设置行内代码块的形式 */
+.b3-typography code:not(.hljs), .protyle-wysiwyg code:not(.hljs) {
+    color: var(--b3-theme-on-background);
+    background-color: var(--b3-theme-background2);
+    border: 0.05em solid #cfcece;
+    border-radius: 5px;
+}
+.b3-typography code:not(.hljs) {
+    font-size: 0.8em;
+    font-family: var(--b3-font-family-code);
+    margin: 0 0.25em;
+    padding: 0.125em 0.25em;
+}
+
+/* 改一下行间代码块的显示 */
+.code-block{
+    border: 1px solid rgba(136, 136, 136, 0.5);
+    border-radius:4px;
+    background:transparent!important;
+}
+
+.code-block > .protyle-action {
+    position: absolute;
+    background-color: var(--b3-theme-background);
+    backdrop-filter: var(--custom-backdrop-popover-filter);
+    /* height: 32px; */
+    height: 0px;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    border: 0px transparent;
+}
+.code-block .hljs.protyle-linenumber{
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
+}
+.code-block .protyle-linenumber__rows{
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
+    border: 0px transparent;
+    border-bottom-left-radius:4px;
+    background-color: rgba(136, 136, 136, 0.05)!important;
+    border-right: 0px solid var(--b3-theme-background-light)!important;
+}
+.code-block > .protyle-action > span.protyle-icon{
+    background-color: rgba(136, 136, 136, 0.05);
+}
+.code-block > .protyle-action > span.protyle-icon >svg{
+    color: var(--b3-theme-on-background);
+}
+
+/* 悬浮窗口border颜色、背景颜色设置 */
+/* .block__popover--move, */
+.protyle-util{
+    border: 0px solid rgb(0, 0, 0)!important;
+}
+.block__popover.block__popover--move.block__popover--open{
+    background-color:var(--b3-theme-background-light)
+}
+
+
+/* 行内备注取消背景色，取消下方的下划线 */
+.b3-typography span[data-type~=inline-memo],
+.protyle-wysiwyg span[data-type~=inline-memo],
+.sy__outline span[data-type~=inline-memo]{
+    background-color:transparent!important;
+}
+.b3-typography span[data-type~=inline-memo],
+.protyle-wysiwyg span[data-type~=inline-memo],
+.sy__outline span[data-type~=inline-memo]{
+    border-bottom: transparent!important;
+}
+
+/* 参考zhang light 减小无序列表前面符号·的大小 */
+
+[data-type="NodeListItem"] .protyle-action>svg  {
+    width: 11px!important;
+}
+
+/* 淡化无序列表折叠后前方圆点的颜色, 取消outline */
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.protyle-action:after {
+    background-color: rgba(136, 136, 136, 0.12) ;
+    outline: 0px !important;
+}
+
+
+
+/* 调整超级块背景颜色、边框 */
+.protyle-wysiwyg div.sb[data-node-id] {
+    background-color: transparent !important;
+}
+.protyle-wysiwyg .sb[data-node-id] {
+    box-shadow: 0 0 0 0 var(--b3-theme-on-surface-light);
+}
+
+/* 调整嵌入块背景颜色，删除嵌入块的虚线 */
+.protyle-wysiwyg [data-node-id][data-type="NodeBlockQueryEmbed"] {
+    background-color: transparent !important;
+    padding: 0px;
+}
+.protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"] {
+    border-left: 1px solid rgba(0, 0, 0, 0); 
+    background-color: transparent !important;
+}
+
+/* 调整标签大小、边框、字体颜色 */
+.protyle-wysiwyg [data-node-id] span[data-type="tag"]::before {
+    width: 0.8em;
+    height: 0.8em;
+    margin: 1px 1px -1px -1px;
+}
+.protyle-wysiwyg [data-node-id] span[data-type="tag"] {
+    border: 1px solid var(--b3-theme-on-background);
+    border-bottom: 1px solid var(--b3-theme-on-background)!important;
+    border-radius: 5px;
+    color: var(--b3-theme-on-background);
+    background-color: transparent !important;
+    /* background-color: rgba(130, 130, 130, 0.10); */
+}
+.protyle-wysiwyg [data-node-id] span[data-type="tag"]:hover {
+    padding-bottom: 1px;
+    background-color: transparent;
+}
+
+
+
+/* 菜单中鼠标、键盘悬停的部分颜色设置 */
+div.b3-menu.b3-list.b3-list--background >  button.b3-list-item:hover{
+    background-color: rgba(130, 130, 130, 0.3);
+}
+.b3-menu__item--current {
+    background-color: rgba(130, 130, 130, 0.3) !important;
+}
+
+.b3-list-item--focus {
+    background-color: rgba(130, 130, 130, 0.3) !important;
+}
+
+/* 对话框背景颜色 */
+.config-bazaar__readme{
+    background-color: var(--b3-theme-background-light) !important;
+}
+
+/* 页签栏不换行 */
+/* .layout-tab-bar {
+    flex-wrap: nowrap;
+} */
+
+
+/* 已完成任务列表项删除线取消*/
+.protyle-wysiwyg div[data-node-id].li.protyle-task--done>div[data-node-id].p {
+    text-decoration: none!important;
+    color: var(--b3-theme-on-background)!important;
+}
+
+.protyle-task--done>div:not([data-subtype=t]) {
+    color: var(--b3-theme-on-background)!important;
+    text-decoration: none!important;
+}
+
+/* 自定义一些icons，备注用 */
+.protyle-wysiwyg [data-node-id] span[data-type="a"][data-href ^="\\cite{"]:not(:empty)::before,
+.b3-typography a[href ^="\\cite{"]::before {
+    background-image: url(/appearance/themes/Dark+/icon/pdf-ref.svg) !important;
+}
+
+.protyle-wysiwyg [data-node-id] span[data-type="a"][data-href ^="\\ref{"]:not(:empty)::before,
+.b3-typography a[href ^="\\ref{"]::before {
+    background-image: url(/appearance/themes/Dark+/icon/pdf-ref.svg) !important;
+}
+
+
+/* 设置里的页签的边框删了 */
+#searchPanel > .b3-list-item, .b3-list.b3-list--background:not(ul) > .b3-list-item, .b3-list.b3-list--background.b3-tab-bar > .b3-list-item, #historyContainer .b3-list.b3-list--background > .b3-list-item {
+    outline: 0px;
+}
+
+/* 嵌入块平常不特殊显示*/
+.protyle-wysiwyg [data-node-id][data-type="NodeBlockQueryEmbed"].render-node > .protyle-wysiwyg__embed {
+    background-color: transparent!important;
+    border: 1px solid var(--b3-theme-background)!important;
+}
+
+/* iframe不要额外设置背景颜色、border等 */
+.b3-typography iframe, .protyle-wysiwyg iframe{
+    background-color: transparent!important;
+    border: 0px !important;
+}
+
+
+/* 命名、别名不显示svg */
+.protyle-attr--name > svg {
+    color:transparent;
+}
+.protyle-attr--alias > svg {
+    color:transparent;
+}
+/* 列表内的数学块、单独的数学块，命名移到正右侧，而不是在上方*/
+[data-type="NodeMathBlock"] + .protyle-attr:has(>.protyle-attr--name),
+[data-type="NodeMathBlock"] + .protyle-attr:has(>.protyle-attr--alias){
+    bottom: 3px!important;
+    top: 0px!important;
+}
+[data-type="NodeMathBlock"] + .protyle-attr>.protyle-attr--refcount{
+    bottom: 0px!important;
+    top: 0px!important;
+}
+
+[data-type="NodeMathBlock"] > .protyle-attr:has(>.protyle-attr--name),
+[data-type="NodeMathBlock"] > .protyle-attr:has(>.protyle-attr--alias){
+    bottom: 3px!important;
+    top: 0px!important;
+}
+[data-type="NodeMathBlock"] > .protyle-attr>.protyle-attr--refcount{
+    bottom: 0px!important;
+    top: 0px!important;
+}
+
+
+/* 反链统计不要阴影，移到编辑区外 */
+.protyle-content > .protyle-wysiwyg .protyle-attr .protyle-attr--refcount{
+    box-shadow: 0 0 0 0 var(--custom-box-shadow-color);
+    transform: translate(50px,0px);
+    opacity: 0.2;
+}
+.protyle-content > .protyle-wysiwyg .protyle-attr .protyle-attr--refcount:hover{
+    opacity: 1;
+}
+
+/* 到pdf的引用，不要svg，改成上标形式 */
+[custom-pdflink~="concise"] [data-type~=file-annotation-ref]::before{
+    width: auto !important;
+    /* background-size: 7px!important; */
+    background-image: none!important;
+    content: "["!important;
+    color: var(--b3-theme-primary);
+}
+[custom-pdflink~="concise"] [data-type~=file-annotation-ref]::after{
+    width: auto !important;
+    /* background-size: 7px!important; */
+    content: "]"!important;
+    color: var(--b3-theme-primary);
+}
+[custom-pdflink~="concise"] [data-type~=file-annotation-ref]{
+    vertical-align: text-top;
+    font-size: 0.5em;
+    color: var(--b3-theme-primary)!important;
+}
+
+/* 到链接的引用，不要svg，改成上标形式 */
+[custom-link~="concise"] [data-type~=a]::before{
+    width: auto !important;
+    background-image: none!important;
+    content: "["!important;
+    color: var(--b3-theme-primary);
+}
+[custom-link~="concise"] [data-type~=a]::after{
+    width: auto !important;
+    content: "]"!important;
+    color: var(--b3-theme-primary);
+}
+[custom-link~="concise"] [data-type~=a]{
+    vertical-align: text-top;
+    font-size: 0.5em;
+    color: var(--b3-theme-primary)!important;
+}
+
+
+/* 网络图片的svg背景不要设置颜色 */
+.protyle-wysiwyg .img__net{
+    background-color: rgba(0, 0, 0, 0.1)!important;
+}
+
+
+/* ------------------------------- 其他设置结束 ------------------------------------------ */
+
+
+
+
+/* ------------------------------- 数学块增强插件相关设置开始 ------------------------------------------ */
+math-field{
+    background-color: var(--b3-theme-background)!important;
+    font-size: 2em;
+    color: var(--b3-theme-on-background);
+    outline-color: transparent!important;
+    outline-width: 0px!important;
+
+    --caret-color: var(--b3-theme-primary);
+    --primary: var(--b3-theme-primary);
+    --selection-color-focused:var(--b3-theme-primary);
+    --smart-fence-color: var(--b3-theme-primary-light);
+    --placeholder-color: var(--b3-theme-primary-light);
+    --contains-highlight-backround-color:var(--b3-theme-primary-lightest);
+    --selection-background-color-focused:var(--b3-theme-primary-lightest);
+    --selection-background-color:var(--b3-theme-primary-lightest);
+}
+
+body .ML__keyboard{
+    --keyboard-background: var(--b3-theme-background)!important;
+    --keyboard-toolbar-text-active: var(--b3-theme-primary);
+    --variant-keycap-background-active: var(--b3-theme-background-light);
+    /* --keycap-text: var(--b3-theme-on-background); */
+    --keycap-text: var(--b3-theme-primary);
+    --keycap-text-active: var(--b3-theme-background-light);
+    --keycap-modifier-background: var(--b3-theme-background-light);
+    --keyboard-accent-color:var(--b3-theme-background-light);
+}
+/* ------------------------------- 数学块增强插件相关设置结束 ------------------------------------------ */
+
+
+
+/* ----------------------------- 无序列表转换表格嵌入块部分开始 ---------------------------------------- */
+
+
+.protyle-content *[custom-type~=table] [data-node-id].li>[data-node-id][data-type="NodeBlockQueryEmbed"],
+.protyle-content *[custom-type~=表格] [data-node-id].li>[data-node-id][data-type="NodeBlockQueryEmbed"],
+.protyle-content *[custom-type~=思维导图] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"],
+.protyle-content *[custom-type~=导图] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"],
+.protyle-content *[custom-type~=脑图] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"],
+.protyle-content *[custom-type~=mind-map] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"],
+.protyle-content *[custom-type~=map] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]{
+    width: calc(100% - 34px)!important;
+    margin-bottom:0px!important;
+    outline:transparent!important;
+}
+
+.protyle-content *[custom-type~=table] [data-node-id].li>[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed,
+.protyle-content *[custom-type~=表格] [data-node-id].li>[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed,
+.protyle-content *[custom-type~=思维导图] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed,
+.protyle-content *[custom-type~=导图] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed,
+.protyle-content *[custom-type~=脑图] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed,
+.protyle-content *[custom-type~=mind-map] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed,
+.protyle-content *[custom-type~=map] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed{
+    background-color: transparent!important;
+    border-top: 1px solid var(--b3-theme-on-surface)!important;
+    border-left: 0px solid var(--b3-theme-on-surface)!important;
+    border-bottom: 0px solid var(--b3-theme-on-surface)!important;
+    border-right: 0px solid var(--b3-theme-on-surface)!important;
+}
+
+.protyle-content *[custom-type~=table] [data-node-id].li>[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed:nth-child(2),
+.protyle-content *[custom-type~=表格] [data-node-id].li>[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed:nth-child(2),
+.protyle-content *[custom-type~=思维导图] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed:nth-child(2),
+.protyle-content *[custom-type~=导图] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed:nth-child(2),
+.protyle-content *[custom-type~=脑图] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed:nth-child(2),
+.protyle-content *[custom-type~=mind-map] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed:nth-child(2),
+.protyle-content *[custom-type~=map] [data-node-id].li>div[data-node-id][data-type="NodeBlockQueryEmbed"]>.protyle-wysiwyg__embed:nth-child(2){
+    border-top: 0px solid var(--b3-theme-on-surface)!important;
+}
+
+/* ---------------------------- 无序列表转换表格嵌入块部分开始结束 -------------------------------------- */
+
+/* ---------------------------- 无序列表转换表格边框设置部分开始 -------------------------------------- */
+
+
+.protyle-content *[custom-type~=table] [data-node-id].list,
+.protyle-content *[custom-type~=表格] [data-node-id].list,
+.protyle-content *[custom-type~=table] [data-node-id].li,
+.protyle-content *[custom-type~=表格] [data-node-id].li {
+    border: 0;
+    padding: 0;
+    margin: 0 !important;
+    height: 100%;
+    outline: 0px solid var(--b3-theme-on-surface);
+    box-shadow: -0.5px 0px 0px 0px var(--b3-theme-on-surface), 0.5px 0px 0px 0px var(--b3-theme-on-surface),0px 0px 0px 0px var(--b3-theme-on-surface),0px 0.5px 0px 0px var(--b3-theme-on-surface);
+}
+.protyle-content *[custom-type~=table]>.li:first-child,
+.protyle-content *[custom-type~=表格]>.li:first-child {
+    box-shadow: -0.5px 0px 0px 0px var(--b3-theme-on-surface), 0.5px 0px 0px 0px var(--b3-theme-on-surface),0px -0.5px 0px 0px var(--b3-theme-on-surface),0px 0.5px 0px 0px var(--b3-theme-on-surface);
+}
+/* ---------------------------- 无序列表转换表格边框设置部分结束 -------------------------------------- */
+
+
+/* ---------------------------- 无序列表转换表格宽度bug解决开始 -------------------------------------- */
+
+div[custom-type~=table].list .li .list{
+    width:100% !important;
+}
+
+/* ---------------------------- 无序列表转换表格宽度bug解决结束 -------------------------------------- */
+
+
+/* ---------------------------- 无序列表渲染为段落开始 -------------------------------------- */
+
+/* 简单地去除缩进与原点 */
+.protyle-wysiwyg [data-node-id][data-type="NodeList"][custom-type="paragraph"]  [data-node-id]:not(.list, [data-type="NodeHeading"]){
+    margin-left: 0em !important;
+}
+.protyle-wysiwyg [data-node-id][data-type="NodeList"][custom-type="paragraph"] .protyle-action>svg>use:not(:hover){
+    opacity:0;
+}
+
+/* 折叠后的按钮图标往左移 */
+.protyle-wysiwyg [data-node-id][data-type="NodeList"][custom-type="paragraph"] [data-node-id].li[fold="1"]>.protyle-action:after{
+    transform:translate(-27px, 0px);
+}
+
+/* 处理嵌套在里面的有序列表，只能处理套一层的情况 */
+.protyle-wysiwyg [data-node-id][data-type="NodeList"][custom-type="paragraph"] [data-type="NodeListItem"] .protyle-action.protyle-action--order{
+    transform:translate(-2em, 0px);
+}
+/* 有序列表的辅助线处理 */
+.protyle-wysiwyg [data-node-id][data-type="NodeList"][custom-type="paragraph"] [data-type="NodeListItem"]:has(>.protyle-action.protyle-action--order)::before{
+    transform:translate(-2em, 0px);
+}
+.protyle-wysiwyg [data-node-id][data-type="NodeList"][custom-type="paragraph"] [data-type="NodeListItem"]:not(div:has(>.protyle-action--order)):has(>[data-type="NodeList"]>[data-type="NodeListItem"]>.protyle-action.protyle-action--order)::before{
+    opacity: 0;
+}
+
+/* 公式块的辅助线处理 */
+.protyle-wysiwyg [data-node-id][data-type="NodeList"][custom-type="paragraph"] .li:has(>[data-type="NodeMathBlock"])::before{
+    opacity:0;
+    /* transform:translate(-2em, -0 px); */
+}
+/* 嵌入块的辅助线处理 */
+.protyle-wysiwyg [data-node-id][data-type="NodeList"][custom-type="paragraph"] .li:has(>[data-type="NodeBlockQueryEmbed"])::before{
+    opacity:0;
+    /* transform:translate(-2em, -0 px); */
+}
+
+/* ---------------------------- 无序列表渲染为段落结束 -------------------------------------- */
